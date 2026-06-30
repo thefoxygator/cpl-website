@@ -1,0 +1,3 @@
+# Shared Supabase project — same instance as cplledger
+# Migrations live in thefoxygator/cplledger/supabase/migrations/
+project_id = "lhojsatlmjyfgrzanmbd"

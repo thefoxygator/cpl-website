@@ -1,1 +1,57 @@
-IyBDUEwgV2Vic2l0ZQoKUHVibGljLWZhY2luZyB3ZWJzaXRlIGZvciB0aGUgKipDcmFwcyBQbGF5ZXIgTGVhZ3VlIChDUEwpKiouCgojIyBBcmNoaXRlY3R1cmUKCi0gKipGcm9udGVuZDoqKiBMb3ZhYmxlIChSZWFjdCArIFR5cGVTY3JpcHQgKyBUYWlsd2luZCBDU1MgKyBzaGFkY24vdWkpCi0gKipEYXRhYmFzZToqKiBTdXBhYmFzZSAoc2hhcmVkIHdpdGggYGNwbGxlZGdlcmAgLS0gcHJvamVjdCBgbGhvanNhdGxtanlmZ3J6YW5tYmRgKQotICoqQXV0b21hdGlvbjoqKiBuOG4gKHBvc3QtYXBwcm92YWwgbGVhZGVyYm9hcmQgcGlwZWxpbmUpCi0gKipIb3N0aW5nOioqIExvdmFibGUgKHByZXZpZXcpIOKGkiBUQkQgcHJvZHVjdGlvbiBkb21haW4KCiMjIFJlbGF0ZWQgUmVwb3NpdG9yaWVzCgp8IFJlcG8gfCBQdXJwb3NlIHwKfC0tLS0tfC0tLS0tLS0tfAp8IFtgdGhlZm94eWdhdG9yL2NwbGxlZGdlcmBdKGh0dHBzOi8vZ2l0aHViLmNvbS90aGVmb3h5Z2F0b3IvY3BsbGVkZ2VyKSB8IENQTCBPZUZMAQ==
+# CPL Website
+
+Public-facing website for the **Craps Player League (CPL)**.
+
+## Architecture
+
+- **Frontend:** Lovable (React + TypeScript + Tailwind CSS + shadcn/ui)
+- **Database:** Supabase (shared with `cplledger` — project `lhojsatlmjyfgrzanmbd`)
+- **Automation:** n8n (post-approval leaderboard pipeline)
+- **Hosting:** Lovable (preview) → TBD production domain
+
+## Related Repositories
+
+| Repo | Purpose |
+|------|--------|
+| [`thefoxygator/cplledger`](https://github.com/thefoxygator/cplledger) | CPL Officials internal app — event management, scoring, approvals |
+| [`thefoxygator/cpl-website`](https://github.com/thefoxygator/cpl-website) | This repo — CPL public website |
+| [`thefoxygator/minimalist-crappy-app`](https://github.com/thefoxygator/minimalist-crappy-app) | CrappinAintEasy — layout reference only |
+
+## Database (Shared Supabase)
+
+Both `cplledger` and `cpl-website` share a single Supabase project.
+Database migrations and schema are maintained in `cplledger/supabase/migrations/`.
+
+**Key tables used by this site:**
+- `cpl_leaderboard` — public read, populated by n8n automation
+- `cpl_events` — public read for upcoming events
+- `cpl_players` — player roster (read-only from website)
+
+## n8n Automation
+
+See `n8n/` directory for workflow JSON files.
+
+The post-approval leaderboard pipeline:
+1. Supabase Database Webhook fires when `cpl_events.status` → `'approved'`
+2. n8n processes personal bests for all players in that event
+3. Recalculates total scores (best_dice + best_bank)
+4. Updates rankings in `cpl_leaderboard`
+5. CPL Website reflects changes instantly — no manual steps
+
+## Development
+
+Frontend is managed in Lovable. Code is synced to this repo via Lovable's GitHub integration.
+
+For database changes, open a PR against `thefoxygator/cplledger`.
+
+## Brand
+
+- Colors: Red, White, Blue — professional sports league
+- Logo: CPL official logo
+- Reference: CrappinAintEasy (`minimalist-crappy-app`) for layout patterns ONLY — not colors or theme
+
+## Deployment
+
+**STOP — Do not publish until Phase 3 approval from Brian.**
+
+See `docs/PHASE3_CHECKLIST.md` for the verification checklist.
