@@ -47,15 +47,15 @@ export const STATIC_EVENTS: CPLEvent[] = [];
 /**
  * The 6 official CPL award badges.
  * Filenames: award-1.png … award-6.png
- * Order matches the uploaded graphics (update labels once Brian confirms names).
+ * Order: Sharp Shooter, Hot Hand, Power Play, High Roller, Bounce Back, Dice Revival
  */
 export const AWARD_BADGES = [
-  { id: "award-1", src: "/badges/award-1.png", label: "CPL Award" },
-  { id: "award-2", src: "/badges/award-2.png", label: "CPL Award" },
-  { id: "award-3", src: "/badges/award-3.png", label: "CPL Award" },
-  { id: "award-4", src: "/badges/award-4.png", label: "CPL Award" },
-  { id: "award-5", src: "/badges/award-5.png", label: "CPL Award" },
-  { id: "award-6", src: "/badges/award-6.png", label: "CPL Award" },
+  { id: "award-1", src: "/badges/award-1.png", label: "Sharp Shooter" },
+  { id: "award-2", src: "/badges/award-2.png", label: "Hot Hand" },
+  { id: "award-3", src: "/badges/award-3.png", label: "Power Play" },
+  { id: "award-4", src: "/badges/award-4.png", label: "High Roller" },
+  { id: "award-5", src: "/badges/award-5.png", label: "Bounce Back" },
+  { id: "award-6", src: "/badges/award-6.png", label: "Dice Revival" },
 ] as const;
 
 /**
